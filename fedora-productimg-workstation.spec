@@ -2,8 +2,8 @@
 %global pixmapsource %{_datadir}/anaconda/pixmaps/workstation
 
 Name:           fedora-productimg-workstation
-Version:        21
-Release:        2%{?dist}
+Version:        22
+Release:        1%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
@@ -42,6 +42,9 @@ done
 %{pixmaptarget}/*.png
 
 %changelog
+* Fri Nov  7 2014 Matthew Miller <mattdm@fedoraproject.org> 22-1 
+- bump to 22 for rawhide
+
 * Thu Nov  6 2014 Matthew Miller <mattdm@fedoraproject.org> 21-2
 - conflict with the other fedora-productimg packages
 
