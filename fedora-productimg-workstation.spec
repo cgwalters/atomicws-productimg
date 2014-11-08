@@ -3,7 +3,7 @@
 
 Name:           fedora-productimg-workstation
 Version:        22
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
@@ -11,6 +11,8 @@ Summary:        Installer branding and configuration for Fedora Workstation
 License:        CC0
 
 BuildArch:      noarch
+
+BuildRequires:  cpio, findutils, xz
 
 Conflicts:      fedora-productimg-cloud, fedora-productimg-server
 
@@ -33,6 +35,13 @@ do
  ln -sf %{pixmapsource}/$image %{buildroot}%{pixmaptarget}
 done
 
+install -m 755 -d %{buildroot}%{_datadir}/fedora-productimg
+
+find %{buildroot}%{pixmaptarget} -depth -printf '%P\0' | \
+   cpio --null --quiet -H newc -o | \
+   xz -9 > \
+   %{buildroot}%{_datadir}/fedora-productimg/product.img
+
 
 %files
 %dir %{_datadir}/lorax/product/usr/share/anaconda
@@ -40,8 +49,14 @@ done
 %dir %{_datadir}/lorax/product/usr
 %dir %{pixmaptarget}
 %{pixmaptarget}/*.png
+%dir %{_datadir}/fedora-productimg
+%{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Fri Nov  7 2014 Matthew Miller <mattdm@fedoraproject.org> 22-2
+- actually also generate a product.img cpio archive and store
+  that in the rpm (for use with livecd-creator or other convenience)
+
 * Fri Nov  7 2014 Matthew Miller <mattdm@fedoraproject.org> 22-1 
 - bump to 22 for rawhide
 
