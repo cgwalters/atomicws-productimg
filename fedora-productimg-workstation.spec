@@ -3,12 +3,14 @@
 
 Name:           fedora-productimg-workstation
 Version:        22
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
 # http://creativecommons.org/publicdomain/zero/1.0/
 License:        CC0
+
+Source0:        anaconda-gtk.css
 
 BuildArch:      noarch
 
@@ -29,11 +31,13 @@ installer. It is not useful on an installed system.
 
 install -m 755 -d %{buildroot}%{pixmaptarget}
 
-for image in \
-  sidebar-bg.png sidebar-logo.png topbar-bg.png
-do
- ln -sf %{pixmapsource}/$image %{buildroot}%{pixmaptarget}
-done
+install -m 644 %{SOURCE0} %{buildroot}%{pixmaptarget}/../
+
+ln -sf %{pixmapsource}/sidebar-bg.png %{buildroot}%{pixmaptarget}
+ln -sf %{pixmapsource}/topbar-bg.png %{buildroot}%{pixmaptarget}
+
+# note filename change with this one
+ln -sf %{pixmapsource}/sidebar-logo.png %{buildroot}%{pixmaptarget}/sidebar-logo_flavor.png
 
 install -m 755 -d %{buildroot}%{_datadir}/fedora-productimg
 
@@ -45,6 +49,7 @@ find %{buildroot}%{pixmaptarget} -depth -printf '%P\0' | \
 
 %files
 %dir %{_datadir}/lorax/product/usr/share/anaconda
+%{_datadir}/lorax/product/usr/share/anaconda/anaconda-gtk.css
 %dir %{_datadir}/lorax/product/usr/share
 %dir %{_datadir}/lorax/product/usr
 %dir %{pixmaptarget}
@@ -53,6 +58,9 @@ find %{buildroot}%{pixmaptarget} -depth -printf '%P\0' | \
 %{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Thu Nov 20 2014 Matthew Miller <mattdm@fedoraproject.org> 22-3
+- merge changes in from f21
+
 * Fri Nov  7 2014 Matthew Miller <mattdm@fedoraproject.org> 22-2
 - actually also generate a product.img cpio archive and store
   that in the rpm (for use with livecd-creator or other convenience)
