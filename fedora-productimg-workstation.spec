@@ -3,7 +3,7 @@
 
 Name:           fedora-productimg-workstation
 Version:        22
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
@@ -16,6 +16,7 @@ BuildArch:      noarch
 
 BuildRequires:  cpio, findutils, xz
 
+Provides:       lorax-product-workstation
 Conflicts:      fedora-productimg-cloud, fedora-productimg-server
 
 %description
@@ -58,6 +59,9 @@ find %{buildroot}%{pixmaptarget} -depth -printf '%P\0' | \
 %{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Thu Nov 20 2014 Matthew Miller <mattdm@fedoraproject.org> 22-4
+- provides lorax-product-workstation
+
 * Thu Nov 20 2014 Matthew Miller <mattdm@fedoraproject.org> 22-3
 - merge changes in from f21
 
