@@ -3,7 +3,7 @@
 
 Name:           fedora-productimg-workstation
 Version:        22
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
@@ -42,10 +42,12 @@ ln -sf %{pixmapsource}/sidebar-logo.png %{buildroot}%{pixmaptarget}/sidebar-logo
 
 install -m 755 -d %{buildroot}%{_datadir}/fedora-productimg
 
-find %{buildroot}%{pixmaptarget} -depth -printf '%P\0' | \
+pushd %{buildroot}%{_datadir}/lorax/product/
+find %{buildroot}%{_datadir}/lorax/product/ -depth -printf '%%P\0' | \
    cpio --null --quiet -H newc -o | \
    xz -9 > \
    %{buildroot}%{_datadir}/fedora-productimg/product.img
+popd
 
 
 %files
@@ -59,6 +61,9 @@ find %{buildroot}%{pixmaptarget} -depth -printf '%P\0' | \
 %{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Wed Nov 26 2014 Matthew Miller <mattdm@fedoraproject.org> 22-5
+- correctly pregenerate product.img cpio archive
+
 * Thu Nov 20 2014 Matthew Miller <mattdm@fedoraproject.org> 22-4
 - provides lorax-product-workstation
 
