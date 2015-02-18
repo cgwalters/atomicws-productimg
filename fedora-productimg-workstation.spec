@@ -3,16 +3,15 @@
 
 Name:           fedora-productimg-workstation
 Version:        22
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
 # http://creativecommons.org/publicdomain/zero/1.0/
 License:        CC0
 
-Source0:        anaconda-gtk.css
-
-BuildArch:      noarch
+Source0:        fedora-workstation.css
+Source1:        fedora-workstation.py
 
 BuildRequires:  cpio, findutils, xz
 
@@ -34,6 +33,9 @@ install -m 755 -d %{buildroot}%{pixmaptarget}
 
 install -m 644 %{SOURCE0} %{buildroot}%{pixmaptarget}/../
 
+mkdir -p %{buildroot}%{_datadir}/lorax/product/%{python_sitearch}/pyanaconda/installclasses
+install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/lorax/product/%{python_sitearch}/pyanaconda/installclasses
+
 ln -sf %{pixmapsource}/sidebar-bg.png %{buildroot}%{pixmaptarget}
 ln -sf %{pixmapsource}/topbar-bg.png %{buildroot}%{pixmaptarget}
 
@@ -52,7 +54,8 @@ popd
 
 %files
 %dir %{_datadir}/lorax/product/usr/share/anaconda
-%{_datadir}/lorax/product/usr/share/anaconda/anaconda-gtk.css
+%{_datadir}/lorax/product/usr/share/anaconda/fedora-workstation.css
+%{_datadir}/lorax/product/%{python_sitearch}/pyanaconda/installclasses/fedora-workstation.py*
 %dir %{_datadir}/lorax/product/usr/share
 %dir %{_datadir}/lorax/product/usr
 %dir %{pixmaptarget}
@@ -61,6 +64,12 @@ popd
 %{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Wed Feb 18 2015 Kalev Lember <kalevlember@gmail.com> 22-6
+- Create a Fedora Workstation InstallClass object to modify the installer defaults.
+- Install the CSS in the proper location so that it can be merged in rather
+  than replacing the existing copy.
+- Change the default environment group to be Fedora Workstation.
+
 * Wed Nov 26 2014 Matthew Miller <mattdm@fedoraproject.org> 22-5
 - correctly pregenerate product.img cpio archive
 
