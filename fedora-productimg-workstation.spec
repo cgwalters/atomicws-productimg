@@ -3,7 +3,7 @@
 
 Name:           fedora-productimg-workstation
 Version:        22
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
@@ -13,7 +13,7 @@ License:        CC0
 Source0:        fedora-workstation.css
 Source1:        fedora-workstation.py
 
-BuildRequires:  cpio, findutils, xz
+BuildRequires:  cpio, findutils, xz, python2-devel
 
 Provides:       lorax-product-workstation
 Conflicts:      fedora-productimg-cloud, fedora-productimg-server
@@ -33,8 +33,8 @@ install -m 755 -d %{buildroot}%{pixmaptarget}
 
 install -m 644 %{SOURCE0} %{buildroot}%{pixmaptarget}/../
 
-mkdir -p %{buildroot}%{_datadir}/lorax/product/%{python_sitearch}/pyanaconda/installclasses
-install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/lorax/product/%{python_sitearch}/pyanaconda/installclasses
+mkdir -p %{buildroot}%{_datadir}/lorax/product/%{python2_sitearch}/pyanaconda/installclasses
+install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/lorax/product/%{python2_sitearch}/pyanaconda/installclasses
 
 ln -sf %{pixmapsource}/sidebar-bg.png %{buildroot}%{pixmaptarget}
 ln -sf %{pixmapsource}/topbar-bg.png %{buildroot}%{pixmaptarget}
@@ -55,7 +55,7 @@ popd
 %files
 %dir %{_datadir}/lorax/product/usr/share/anaconda
 %{_datadir}/lorax/product/usr/share/anaconda/fedora-workstation.css
-%{_datadir}/lorax/product/%{python_sitearch}/pyanaconda/installclasses/fedora-workstation.py*
+%{_datadir}/lorax/product/%{python2_sitearch}/pyanaconda/installclasses/fedora-workstation.py*
 %dir %{_datadir}/lorax/product/usr/share
 %dir %{_datadir}/lorax/product/usr
 %dir %{pixmaptarget}
@@ -64,6 +64,9 @@ popd
 %{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Wed Feb 25 2015 Adam Williamson <awilliam@redhat.com> - 22-7
+- BuildRequire python2-devel so the install class goes to the right place
+
 * Wed Feb 18 2015 Kalev Lember <kalevlember@gmail.com> 22-6
 - Create a Fedora Workstation InstallClass object to modify the installer defaults.
 - Install the CSS in the proper location so that it can be merged in rather
