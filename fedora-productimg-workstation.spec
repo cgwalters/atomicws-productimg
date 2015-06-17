@@ -3,7 +3,7 @@
 
 Name:           fedora-productimg-workstation
 Version:        22
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
@@ -64,6 +64,9 @@ popd
 %{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 22-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Wed Feb 25 2015 Adam Williamson <awilliam@redhat.com> - 22-7
 - BuildRequire python2-devel so the install class goes to the right place
 
