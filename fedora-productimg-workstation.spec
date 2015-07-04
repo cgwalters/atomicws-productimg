@@ -2,8 +2,8 @@
 %global pixmapsource %{_datadir}/anaconda/pixmaps/workstation
 
 Name:           fedora-productimg-workstation
-Version:        22
-Release:        8%{?dist}
+Version:        23
+Release:        1%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
@@ -13,7 +13,8 @@ License:        CC0
 Source0:        fedora-workstation.css
 Source1:        fedora-workstation.py
 
-BuildRequires:  cpio, findutils, xz, python2-devel
+BuildRequires:  cpio, findutils, xz
+BuildRequires:  python3-devel
 
 Provides:       lorax-product-workstation
 Conflicts:      fedora-productimg-cloud, fedora-productimg-server
@@ -33,8 +34,8 @@ install -m 755 -d %{buildroot}%{pixmaptarget}
 
 install -m 644 %{SOURCE0} %{buildroot}%{pixmaptarget}/../
 
-mkdir -p %{buildroot}%{_datadir}/lorax/product/%{python2_sitearch}/pyanaconda/installclasses
-install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/lorax/product/%{python2_sitearch}/pyanaconda/installclasses
+mkdir -p %{buildroot}%{_datadir}/lorax/product/%{python3_sitearch}/pyanaconda/installclasses
+install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/lorax/product/%{python3_sitearch}/pyanaconda/installclasses
 
 ln -sf %{pixmapsource}/sidebar-bg.png %{buildroot}%{pixmaptarget}
 ln -sf %{pixmapsource}/topbar-bg.png %{buildroot}%{pixmaptarget}
@@ -55,7 +56,8 @@ popd
 %files
 %dir %{_datadir}/lorax/product/usr/share/anaconda
 %{_datadir}/lorax/product/usr/share/anaconda/fedora-workstation.css
-%{_datadir}/lorax/product/%{python2_sitearch}/pyanaconda/installclasses/fedora-workstation.py*
+%{_datadir}/lorax/product/%{python3_sitearch}/pyanaconda/installclasses/fedora-workstation.py
+%{_datadir}/lorax/product/%{python3_sitearch}/pyanaconda/installclasses/__pycache__/*
 %dir %{_datadir}/lorax/product/usr/share
 %dir %{_datadir}/lorax/product/usr
 %dir %{pixmaptarget}
@@ -64,6 +66,9 @@ popd
 %{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Sat Jul 04 2015 Kalev Lember <klember@redhat.com> - 23-1
+- Switch to Python 3
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 22-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
