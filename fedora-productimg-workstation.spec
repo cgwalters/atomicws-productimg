@@ -3,7 +3,7 @@
 
 Name:           fedora-productimg-workstation
 Version:        23
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
@@ -66,6 +66,9 @@ popd
 %{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 23-2
+- Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
+
 * Sat Jul 04 2015 Kalev Lember <klember@redhat.com> - 23-1
 - Switch to Python 3
 
