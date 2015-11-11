@@ -57,7 +57,6 @@ popd
 %dir %{_datadir}/lorax/product/usr/share/anaconda
 %{_datadir}/lorax/product/usr/share/anaconda/fedora-workstation.css
 %{_datadir}/lorax/product/%{python3_sitearch}/pyanaconda/installclasses/fedora-workstation.py
-%{_datadir}/lorax/product/%{python3_sitearch}/pyanaconda/installclasses/__pycache__/*
 %dir %{_datadir}/lorax/product/usr/share
 %dir %{_datadir}/lorax/product/usr
 %dir %{pixmaptarget}
