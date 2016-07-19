@@ -3,7 +3,7 @@
 
 Name:           fedora-productimg-workstation
 Version:        23
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
@@ -65,6 +65,9 @@ popd
 %{_datadir}/fedora-productimg/product.img
 
 %changelog
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 23-4
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 * Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 23-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
