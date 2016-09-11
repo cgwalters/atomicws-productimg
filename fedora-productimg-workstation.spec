@@ -2,8 +2,8 @@
 %global pixmapsource %{_datadir}/anaconda/pixmaps/workstation
 
 Name:           fedora-productimg-workstation
-Version:        23
-Release:        4%{?dist}
+Version:        25
+Release:        99.atomic.0%{?dist}
 Summary:        Installer branding and configuration for Fedora Workstation
 
 # Copyright and related rights waived via CC0
