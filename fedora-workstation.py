@@ -15,6 +15,7 @@ class FedoraWorkstationInstallClass(FedoraBaseInstallClass):
     name = "Atomic Workstation"
     stylesheet = "/usr/share/anaconda/fedora-workstation.css"
     defaultFS = "xfs"
+    sortPriority = FedoraBaseInstallClass.sortPriority + 1
     defaultPackageEnvironment = "workstation-product-environment"
 
     def setDefaultPartitioning(self, storage):
